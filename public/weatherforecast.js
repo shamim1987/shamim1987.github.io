@@ -26,7 +26,6 @@ var prepareData = function (units) {
 }
 $(document).ready(function () {
   $('.btn-metric').click(function () {
-    alert(openWeatherUrl)
     prepareData('metric')
   })
   $('.btn-imperial').click(function () {
@@ -113,9 +112,11 @@ var h4 = document.getElementById('h4')
 var test = document.getElementById('test')
 h4.innerText = cityName
 savingCity.on('child_added',function(snapshot) {
-  var table = document.createElement('table')
-  table.innerHTML = snapshot.val()
-  test.appendChild(table)
+  console.log(cityName)
+  console.log(snapshot.val())
+  // var table = document.createElement('table')
+  // table.innerHTML = snapshot.val()
+  // test.appendChild(table)
 })
 //Remove Cities
 
