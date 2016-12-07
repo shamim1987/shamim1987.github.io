@@ -1,0 +1,52 @@
+// set up a new reference to your firebase app
+var myFirebaseRef = new Firebase("https://app-name.firebaseio.com/");
+
+// use the .set() method to add data in the form of an object
+myFirebaseRef.set({name: "adam"});
+
+myFirebaseRef.set({comment: [{name: "adam"},{name: "john"}]});
+
+// sets up a reference to your comments child node
+var myCommentsRef = new Firebase("https://app-name.firebaseio.com/comments/");
+
+// this uses the .child() method to set data
+myFirebaseRef.child('news').set({story: "title this"});
+
+// var database = firebase.database()
+// var cityWeatherRefObj = database.ref().child('cityWeather')
+// var cityNameRefObj = database.ref().child(cityName)
+// var cityName = cityNameRefObj.child('')
+// var comment// = cityNameRefObj.child('comment'),
+  // author = comment.child('author'),
+  // title = comment.child('title'),
+  // body = comment.child('body')
+// var dateTime// = cityNameRefObj.child(date),
+  // condition = dateTime.child('condition'),
+  // temperature = dateTime.child('temperature'),
+  // wind = dateTime.child('wind')
+  // var dbRefList = dbRefObj.child('hobbies')
+
+  // log the value of the data snapshot
+myFirebaseRef.on("value", function(snapshot) { console.log(snapshot.val()); });
+
+// removes all data in your reference
+myFirebaseRef.remove()
+
+// removes all data in the child node of news
+myFirebaseRef.child('news').remove();
+
+// shows the number of children associated with the snapshot
+myFirebaseRef.on("value", function(snapshot) { var data = snapshot.numChildren(); $(".data").html(data); });
+
+
+// return a boolean if the snapshot has a child node of comments
+myFirebaseRef.on("value", function (snapshot) { var data = snapshot.hasChild('comments'); $(".data").html(data); });
+
+// loop through each node with the .forEach() method and append it to the DOM
+myFirebaseRef.child('messages').on("value", function(snapshot) {
+    var data = snapshot.forEach(function(child) {
+        console.log(child.val());
+        var message = child.val();
+        $('.data').append("<li>" + message + "</li>" );
+    });
+});

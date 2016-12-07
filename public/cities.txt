@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Cities</title>
+
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <nav>
+       <!-- Search City bar -->
+    <div id="navbar">
+     <div class="searchCity">
+       <label for="">City</label>
+       <input type="text" name="city" placeholder="Where ya goin?" id="city" />
+       <button type="submit" name="btn" id="btn">Submit</button>
+     </div>
+
+     <div class="Dash">
+    <a href="#">Dashboard</a>
+     </div>
+     <div class="My Cities">
+       <a href="./cities.html">My Cities</a>
+     </div>
+    </div>
+
+    <!-- current weather  -->
+    <div class="weather-app">
+        <div class="left">
+            <div class="temperature"><span id="temperature">0</span>&deg;</div>
+            <div class="location"><span id="location">Unknown</span></div>
+            <div class="save"><span id="save"><button type="submit" name="save">Save</button></span>
+
+            </div>
+        </div>
+        <div class="right">
+            <div class="top">
+                <img id="icon" width="75px" src="imgs/codes/200.png" />
+            </div>
+
+            <div class="bottom">
+
+                <div class="humidity">
+                    <img src="imgs/humidity.png" height="16px" />
+                    <span id="humidity">0</span>%
+                </div>
+
+                <div class="wind">
+                    <span id="wind">0</span> mph <span id="direction">N</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </nav>
+
+  <!--Saved Cities -->
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js" charset="utf-8"></script>
+    <script src="weather.js" charset="utf-8"></script>
+    <script src="weatherforecast.js" charset="utf-8"></script>
+  </body>
+</html>

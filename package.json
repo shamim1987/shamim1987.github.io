@@ -1,0 +1,23 @@
+{
+  "name": "weathernode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shamim1987/travelWeatherApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shamim1987/travelWeatherApp/issues"
+  },
+  "homepage": "https://github.com/shamim1987/travelWeatherApp#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "firebase": "^3.6.2"
+  }
+}
