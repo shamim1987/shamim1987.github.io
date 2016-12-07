@@ -11,7 +11,7 @@ var config = {
 }
 firebase.initializeApp(config)
 var database = firebase.database()
-//var savingCity = database.ref('cities')
+// var savingCity = database.ref('cities')
 
 var prepareData = function (units) {
     // Replace loading image
@@ -93,33 +93,34 @@ function fetchData (forecast) {
 // get city from DB
       savedCity.on('child_added', function (dateSnapshot) {
         for (var dateSnap in dateSnapshot.val()) {
+          console.log(dateSnapshot.val()[dateSnap])
           var tR = document.createElement('tr')
           var tD1 = document.createElement('td')
-          tD1.innerText = dateSnap
+          tD1.innerText = dateSnapshot.val()[dateSnap]
           tR.appendChild(tD1)
           cityTable.appendChild(tR)
-          for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
-            var tD2 = document.createElement('td')
-            tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
-            tR.appendChild(tD2)
-            cityTable.appendChild(tR)
-          }
+          // for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
+          //   console.log(tempSnapshot)
+          //   var tD2 = document.createElement('td')
+          //   tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
+          //   tR.appendChild(tD2)
+          //   cityTable.appendChild(tR)
+          // }
         }
       })
 
-//Render Cities
-var h4 = document.getElementById('h4')
-//var test = document.getElementById('test')
-//h4.innerText = cityName
-// database.on('child_added',function(snapshot) {
-//   console.log(cityName)
-//   console.log(snapshot.val())
-//   // var table = document.createElement('table')
-//   // table.innerHTML = snapshot.val()
-//   // test.appendChild(table)
-// })
-//Remove Cities
-
+// Render Cities
+      var h4 = document.getElementById('h4')
+      var test = document.getElementById('test')
+      h4.innerText = cityName
+      // savedCity.on('child_added', function (snapshot) {
+      //   console.log(cityName)
+      //   console.log(snapshot.val())
+      //   var table = document.createElement('table')
+      //   table.innerHTML = snapshot.val()
+      //   test.appendChild(table)
+      // })
+// Remove Cities
     }
   })
   $('#log').html(selectedCity)
