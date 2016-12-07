@@ -11,7 +11,7 @@ var config = {
 }
 firebase.initializeApp(config)
 var database = firebase.database()
-var savingCity = database.ref().child('Cities')
+//var savingCity = database.ref('cities')
 
 var prepareData = function (units) {
     // Replace loading image
@@ -66,7 +66,7 @@ function fetchData (forecast) {
     text: 'Save City',
     click: function () {
     // add city to DB
-      var savedCity = savingCity.child(cityName)
+      var savedCity = database.ref(cityName)
 
       // check if city has alr been saved
       // savedCity.on('value', function (snapshot) {
@@ -91,7 +91,7 @@ function fetchData (forecast) {
       var cityTable = document.getElementById('cityList')
 
 // get city from DB
-      savedCity.on('value', function (dateSnapshot) {
+      savedCity.on('child_added', function (dateSnapshot) {
         for (var dateSnap in dateSnapshot.val()) {
           var tR = document.createElement('tr')
           var tD1 = document.createElement('td')
@@ -109,15 +109,15 @@ function fetchData (forecast) {
 
 //Render Cities
 var h4 = document.getElementById('h4')
-var test = document.getElementById('test')
-h4.innerText = cityName
-savingCity.on('child_added',function(snapshot) {
-  console.log(cityName)
-  console.log(snapshot.val())
-  // var table = document.createElement('table')
-  // table.innerHTML = snapshot.val()
-  // test.appendChild(table)
-})
+//var test = document.getElementById('test')
+//h4.innerText = cityName
+// database.on('child_added',function(snapshot) {
+//   console.log(cityName)
+//   console.log(snapshot.val())
+//   // var table = document.createElement('table')
+//   // table.innerHTML = snapshot.val()
+//   // test.appendChild(table)
+// })
 //Remove Cities
 
     }
