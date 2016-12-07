@@ -1,8 +1,6 @@
 var openWeatherAppId = '9fa53fa43aee027ccddf17a69acbea83',
   openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast'
 
-alert(openWeatherUrl)
-
 // Initialize Firebase
 var config = {
   apiKey: 'AIzaSyDetsWY2WEsxPVrWMrWfwi_76ddUVup1SU',
