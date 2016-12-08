@@ -66,121 +66,135 @@ function fetchData(forecast) {
     var $savebutn = $('<button/>', {
         id: 'save',
         text: 'Save City',
-        click: function() {
-            // add city to DB
-
-
-            // check if city has alr been saved
-            // savedCity.on('value', function (snapshot) {
-            //   // console.log(searchCity.val())
-            //   console.log('data from database searching for ' + cityName)
-            //   console.log(snapshot.val())
-            //   if (cityName == '') {
-            //     alert('You saved this city already bruh')
-            //   } else {
-            //     alert('City Added!')
-            //   }
-            // })
-
-            forecast.list.forEach(function(forecastEntry) {
-                var date = forecastEntry.dt_txt
-                var temperature = forecastEntry.main.temp
-                var humidity = forecastEntry.main.humidity
-                var savedDate = savedCity.child(date).set({temperature: temperature, humidity: humidity})
-            })
-            // var cityTable = document.getElementById('cityList')
-            // var titleBox = document.getElementById('city_name')
-            // var cityBox = document.getElementById('cityBox')
-            //
-            // // get city from DB &&
-            //
-            // savedCity.once('child_added', function(snapshot) {
-            //     var cityList = document.createElement('li')
-            //     var anchor = document.createElement('button')
-            //     anchor.title = cityName
-            //     anchor.setAttribute('class','btn btn-primary')
-            //     anchor.setAttribute('data-toggle', 'modal')
-            //     anchor.setAttribute('data-target', 'modal fade bs-example-modal-lg')
-            //     var linkText = document.createTextNode(cityName)
-            //     anchor.appendChild(linkText)
-            //     cityList.appendChild(anchor)
-            //     titleBox.appendChild(cityList)
-            // })
-            //
-            // savedCity.on('child_added', function(dateSnapshot) {
-            //     console.log(dateSnapshot.val())
-            //     var cityModal = document.getElementById('cityModalDiv')
-            //     var cityTable = document.getElementById('cityTable')
-            //     for (var snap in dateSnapshot.val()) {
-            //         // console.log(dateSnapshot.val()[dateSnap])
-            //         var tR = document.createElement('tr')
-            //         var tD1 = document.createElement('td')
-            //         var tD2 = document.createElement('td')
-            //         tD1.innerText = dateSnapshot.val()[snap]
-            //         tD2.innerText = snap
-            //         tR.appendChild(tD1)
-            //         tR.appendChild(tD2)
-            //         cityTable.appendChild(tR)
-            //
-            //         // for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
-            //         //   console.log(tempSnapshot)
-            //         //   var tD2 = document.createElement('td')
-            //         //   tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
-            //         //   tR.appendChild(tD2)
-            //         //   cityTable.appendChild(tR)
-            //         // }
-            //     }
-            //     cityModal.appendChild(cityTable)
-            //     //cityBox.appendChild(cityContainer)
-            // })
-        }
+        // click: function() {
+        //     // add city to DB
+        //
+        //
+        //     // check if city has alr been saved
+        //     // savedCity.on('value', function (snapshot) {
+        //     //   // console.log(searchCity.val())
+        //     //   console.log('data from database searching for ' + cityName)
+        //     //   console.log(snapshot.val())
+        //     //   if (cityName == '') {
+        //     //     alert('You saved this city already bruh')
+        //     //   } else {
+        //     //     alert('City Added!')
+        //     //   }
+        //     // })
+        //
+        //     // forecast.list.forEach(function(forecastEntry) {
+        //     //     var date = forecastEntry.dt_txt
+        //     //     var temperature = forecastEntry.main.temp
+        //     //     var humidity = forecastEntry.main.humidity
+        //     //     var savedDate = savedCity.child(date).set({temperature: temperature, humidity: humidity})
+        //     // })
+        //     // var cityTable = document.getElementById('cityList')
+        //     // var titleBox = document.getElementById('city_name')
+        //     // var cityBox = document.getElementById('cityBox')
+        //     //
+        //     // // get city from DB &&
+        //     //
+        //     // savedCity.once('child_added', function(snapshot) {
+        //     //     var cityList = document.createElement('li')
+        //     //     var anchor = document.createElement('button')
+        //     //     anchor.title = cityName
+        //     //     anchor.setAttribute('class','btn btn-primary')
+        //     //     anchor.setAttribute('data-toggle', 'modal')
+        //     //     anchor.setAttribute('data-target', 'modal fade bs-example-modal-lg')
+        //     //     var linkText = document.createTextNode(cityName)
+        //     //     anchor.appendChild(linkText)
+        //     //     cityList.appendChild(anchor)
+        //     //     titleBox.appendChild(cityList)
+        //     // })
+        //     //
+        //     // savedCity.on('child_added', function(dateSnapshot) {
+        //     //     console.log(dateSnapshot.val())
+        //     //     var cityModal = document.getElementById('cityModalDiv')
+        //     //     var cityTable = document.getElementById('cityTable')
+        //     //     for (var snap in dateSnapshot.val()) {
+        //     //         // console.log(dateSnapshot.val()[dateSnap])
+        //     //         var tR = document.createElement('tr')
+        //     //         var tD1 = document.createElement('td')
+        //     //         var tD2 = document.createElement('td')
+        //     //         tD1.innerText = dateSnapshot.val()[snap]
+        //     //         tD2.innerText = snap
+        //     //         tR.appendChild(tD1)
+        //     //         tR.appendChild(tD2)
+        //     //         cityTable.appendChild(tR)
+        //     //
+        //     //         // for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
+        //     //         //   console.log(tempSnapshot)
+        //     //         //   var tD2 = document.createElement('td')
+        //     //         //   tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
+        //     //         //   tR.appendChild(tD2)
+        //     //         //   cityTable.appendChild(tR)
+        //     //         // }
+        //     //     }
+        //     //     cityModal.appendChild(cityTable)
+        //     //     //cityBox.appendChild(cityContainer)
+        //     // })
+        // }
     })
     $('#log').html(selectedCity)
     $('#log').append($savebutn)
 
-    var cityTable = document.getElementById('cityList')
-    var titleBox = document.getElementById('city_name')
-    var cityBox = document.getElementById('cityBox')
+      //prepare saved cities
+    $('#save').click(function() {
+      forecast.list.forEach(function(forecastEntry) {
+          var date = forecastEntry.dt_txt
+          var temperature = forecastEntry.main.temp
+          var humidity = forecastEntry.main.humidity
+          var savedDate = savedCity.child(date).set({temperature: temperature, humidity: humidity})
+      })
+      var cityTable = document.getElementById('cityList')
+      var titleBox = document.getElementById('city_name')
+      var cityBox = document.getElementById('cityBox')
+      savedCity.once('child_added', function(snapshot) {
+          var cityList = document.createElement('li')
+          var anchor = document.createElement('button')
+          anchor.title = cityName
+          anchor.setAttribute('id',cityName)
+          anchor.setAttribute('class','btn btn-primary btn-city')
+          anchor.setAttribute('data-toggle', 'modal')
+          anchor.setAttribute('data-target', 'modal fade bs-example-modal-lg')
+          var linkText = document.createTextNode(cityName)
+          anchor.appendChild(linkText)
+          cityList.appendChild(anchor)
+          titleBox.appendChild(cityList)
+      })
 
-    // get city from DB &&
 
-    savedCity.once('child_added', function(snapshot) {
-        var cityList = document.createElement('li')
-        var anchor = document.createElement('button')
-        anchor.title = cityName
-        anchor.setAttribute('class','btn btn-primary')
-        anchor.setAttribute('data-toggle', 'modal')
-        anchor.setAttribute('data-target', 'modal fade bs-example-modal-lg')
-        var linkText = document.createTextNode(cityName)
-        anchor.appendChild(linkText)
-        cityList.appendChild(anchor)
-        titleBox.appendChild(cityList)
+    })
+    //activate city modal
+    //  var modalButton = document.getElementById('cityBox')
+    var cityModal = document.getElementById('cityModalDiv')
+    var cityTable = document.getElementById('cityTable')
+    // modalButton.addEventListener('click', function(){
+    //   alert('its ALIVE')
+    // })
+
+    $('#cityBox').on('click', '.btn-city', function() {
+      alert('delegated')
     })
 
-    savedCity.on('child_added', function(dateSnapshot) {
-        console.log(dateSnapshot.val())
-        var cityModal = document.getElementById('cityModalDiv')
-        var cityTable = document.getElementById('cityTable')
-        for (var snap in dateSnapshot.val()) {
-            // console.log(dateSnapshot.val()[dateSnap])
-            var tR = document.createElement('tr')
-            var tD1 = document.createElement('td')
-            var tD2 = document.createElement('td')
-            tD1.innerText = dateSnapshot.val()[snap]
-            tD2.innerText = snap
-            tR.appendChild(tD1)
-            tR.appendChild(tD2)
-            cityTable.appendChild(tR)
-
-            // for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
-            //   console.log(tempSnapshot)
-            //   var tD2 = document.createElement('td')
-            //   tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
-            //   tR.appendChild(tD2)
-            //   cityTable.appendChild(tR)
-            // }
-        }
-        cityModal.appendChild(cityTable)
-        //cityBox.appendChild(cityContainer)
-    })
+    // $(cityName).click(function() {
+    //   alert('it lives')
+    //   // savedCity.on('value', function(dateSnapshot) {
+    //   //     console.log(dateSnapshot.val())
+    //   //     for (var snap in dateSnapshot.val()) {
+    //   //         // console.log(dateSnapshot.val()[dateSnap])
+    //   //         var tR = document.createElement('tr')
+    //   //         var tD1 = document.createElement('td')
+    //   //         var tD2 = document.createElement('td')
+    //   //         tD1.innerText = dateSnapshot.val()[snap]
+    //   //         tD2.innerText = snap
+    //   //         tR.appendChild(tD1)
+    //   //         tR.appendChild(tD2)
+    //   //         cityTable.appendChild(tR)
+    //   //         cityModal.appendChild(cityTable)
+    //   //     }
+    //   //
+    //   //
+    //   // })
+    // })
 }
