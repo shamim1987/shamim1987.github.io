@@ -49,7 +49,7 @@ function getData (url, cityName, appId, units) {
   })
 }
 function fetchData (forecast) {
-  // console.log(forecast)
+    // console.log(forecast)
   var selectedCity = '',
     cityName = forecast.city.name,
     country = forecast.city.country
@@ -65,62 +65,64 @@ function fetchData (forecast) {
     id: 'save',
     text: 'Save City',
     click: function () {
-    // add city to DB
+            // add city to DB
       var savedCity = database.ref(cityName)
 
-      // check if city has alr been saved
-      // savedCity.on('value', function (snapshot) {
-      //   // console.log(searchCity.val())
-      //   console.log('data from database searching for ' + cityName)
-      //   console.log(snapshot.val())
-      //   if (cityName == '') {
-      //     alert('You saved this city already bruh')
-      //   } else {
-      //     alert('City Added!')
-      //   }
-      // })
+            // check if city has alr been saved
+            // savedCity.on('value', function (snapshot) {
+            //   // console.log(searchCity.val())
+            //   console.log('data from database searching for ' + cityName)
+            //   console.log(snapshot.val())
+            //   if (cityName == '') {
+            //     alert('You saved this city already bruh')
+            //   } else {
+            //     alert('City Added!')
+            //   }
+            // })
+
       forecast.list.forEach(function (forecastEntry) {
         var date = forecastEntry.dt_txt
         var temperature = forecastEntry.main.temp
         var humidity = forecastEntry.main.humidity
-        var savedDate = savedCity.child(date).set({
-          temperature: temperature,
-          humidity: humidity
-        })
+        var savedDate = savedCity.child(date).set({temperature: temperature, humidity: humidity})
       })
       var cityTable = document.getElementById('cityList')
+      var titleBox = document.getElementById('city_name')
+      var cityBox = document.getElementById('cityBox')
 
-// get city from DB
-      savedCity.on('child_added', function (dateSnapshot) {
-        for (var dateSnap in dateSnapshot.val()) {
-          console.log(dateSnapshot.val()[dateSnap])
-          var tR = document.createElement('tr')
-          var tD1 = document.createElement('td')
-          tD1.innerText = dateSnapshot.val()[dateSnap]
-          tR.appendChild(tD1)
-          cityTable.appendChild(tR)
-          // for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
-          //   console.log(tempSnapshot)
-          //   var tD2 = document.createElement('td')
-          //   tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
-          //   tR.appendChild(tD2)
-          //   cityTable.appendChild(tR)
-          // }
-        }
+            // get city from DB &&
+
+      savedCity.once('child_added', function (snapshot) {
+        var title = document.createElement('h6')
+        title.innerText = cityName
+        titleBox.appendChild(title)
+
       })
 
-// Render Cities
-      var h4 = document.getElementById('h4')
-      var test = document.getElementById('test')
-      h4.innerText = cityName
-      // savedCity.on('child_added', function (snapshot) {
-      //   console.log(cityName)
-      //   console.log(snapshot.val())
-      //   var table = document.createElement('table')
-      //   table.innerHTML = snapshot.val()
-      //   test.appendChild(table)
+      // savedCity.on('child_added', function (dateSnapshot) {
+      //   console.log(dateSnapshot.val())
+      //   for (var snap in dateSnapshot.val()) {
+      //     // console.log(dateSnapshot.val()[dateSnap])
+      //     var tR = document.createElement('tr')
+      //     var tD1 = document.createElement('td')
+      //     var tD2 = document.createElement('td')
+      //     tD1.innerText = dateSnapshot.val()[snap]
+      //     tD2.innerText = snap
+      //     tR.appendChild(tD1)
+      //     tR.appendChild(tD2)
+      //     cityTable.appendChild(tR)
+      //
+      //               // for (var tempSnapshot in dateSnapshot.val()[dateSnap]) {
+      //               //   console.log(tempSnapshot)
+      //               //   var tD2 = document.createElement('td')
+      //               //   tD2.innerText = dateSnapshot.val()[dateSnap][tempSnapshot]
+      //               //   tR.appendChild(tD2)
+      //               //   cityTable.appendChild(tR)
+      //               // }
+      //   }
+      //   cityContainer.appendChild(cityTable)
+        // cityBox.appendChild(cityContainer)
       // })
-// Remove Cities
     }
   })
   $('#log').html(selectedCity)
