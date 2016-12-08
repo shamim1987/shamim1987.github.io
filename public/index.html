@@ -92,7 +92,7 @@
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="Search" id="city">
                 </div>
-                <button type="button" class="btn btn-default" id="btn" data-toggle="modal" data-target=".bs-example-modal-lg">Find</button>
+                <button type="button" class="btn btn-default" id="btn" data-toggle="modal" data-target=".bs-example-modal-sm">Find</button>
               </form>
 
             </div><!-- /.navbar-collapse -->
@@ -102,7 +102,7 @@
     </nav>
     <!-- Large modal -->
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="weather-app">
@@ -166,25 +166,27 @@
             <div class="row">
               <table id="log" class="table table-striped"></table>
             </div>
+            <div class="row" id="cityBox">
+              <h3>Your cities</h3>
+              <ul id="city_name">
+
+              </ul>
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" id="citymodalDiv">
+                       <table id="cityTable">
+
+                       </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
           </div>
         </div>
         <!-- /.row -->
         <!-- /.container -->
     </section>
-<section>
 
-    <div class="jumbotron" >
-
-        <div class="container" id="cityBox">
-
-            <ul id="city_name">
-                <li><h3>Your Cities Here</h3></li>
-
-            </ul>
-        
-        </div>
-    </div>
-</section>
 
     <!-- Footer -->
     <footer>
