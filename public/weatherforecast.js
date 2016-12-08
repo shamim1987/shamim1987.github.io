@@ -93,10 +93,14 @@ function fetchData (forecast) {
             // get city from DB &&
 
       savedCity.once('child_added', function (snapshot) {
-        var title = document.createElement('h6')
-        title.innerText = cityName
-        titleBox.appendChild(title)
-
+        var cityList = document.createElement('li')
+        var anchor = document.createElement('a')
+        anchor.title = cityName;
+        anchor.href = "http://example.com";
+        var linkText = document.createTextNode(cityName);
+        anchor.appendChild(linkText);
+        cityList.appendChild(anchor)
+        titleBox.appendChild(cityList)
       })
 
       // savedCity.on('child_added', function (dateSnapshot) {
