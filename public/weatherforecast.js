@@ -107,7 +107,7 @@ function fetchData (forecast) {
   var weatherParams = document.getElementById('weatherParams')
   var tBod = document.getElementById('tBod')
 
-  $('#cityBox').on('click','#' + cityName, function () {
+  $('#cityBox').on('click','.btn-city', function () {
     savedCity.on('value', function (dateSnapshot) {
       // var div1 = document.createElement('div')
       // div1.setAttribute('class','modal fade bs-example-modal-lg')
